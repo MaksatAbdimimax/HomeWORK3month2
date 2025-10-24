@@ -1,7 +1,9 @@
 package com.geeks.homework3month2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -15,9 +17,14 @@ import com.google.android.material.button.MaterialButton;
 public class MainActivity extends AppCompatActivity {
 
     private TextView textView;
+    private Button buttonOpenSecondAc, equalsButton;
     private int x,y;
     private boolean isOperationClick;
     private String operation;
+    private  int result = 0;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +37,34 @@ public class MainActivity extends AppCompatActivity {
                 return insets;
             });*/
         textView = findViewById(R.id.textView);
+        buttonOpenSecondAc = findViewById(R.id.btn_open_sec);
+        equalsButton = findViewById(R.id.btn_equal);
         initClickButton();
 
+
+
+        buttonOpenSecondAc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                intent.putExtra("calc_result", result);
+                startActivity(intent);
+            }
+        });
+
+        /*findViewById(R.id.btn_open_sec).setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+            startActivity(intent);
+        });*/
+
     }
+
+
 
     private void initClickButton() {
 
         findViewById(R.id.btn_zero).setOnClickListener(view -> {
+
             onNumberClick(view);
         });
 
@@ -99,10 +127,12 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_equal).setOnClickListener(view -> {
             onOperationClick(view);
 
+
         });
     }
 
     private void onNumberClick (View view){
+        buttonOpenSecondAc.setAlpha(0);
        String text = ((MaterialButton)view).getText().toString();
        if (text.equals("AC")) {
            textView.setText("0");
@@ -118,18 +148,24 @@ public class MainActivity extends AppCompatActivity {
 
     private  void onOperationClick (View view){
         if(view.getId() == R.id.btn_plus){
+            buttonOpenSecondAc.setAlpha(0);
             x = Integer.parseInt(textView.getText().toString());
             operation = "+";
         } else if (view.getId() == R.id.btn_minus) {
+            buttonOpenSecondAc.setAlpha(0);
             x = Integer.parseInt(textView.getText().toString());
             operation = "-";
         }else if (view.getId() == R.id.btn_multiplication) {
+            buttonOpenSecondAc.setAlpha(0);
             x = Integer.parseInt(textView.getText().toString());
             operation = "X";
         }else if (view.getId() == R.id.btn_division ) {
+            buttonOpenSecondAc.setAlpha(0);
             x = Integer.parseInt(textView.getText().toString());
             operation = "/";
         } else if (view.getId() == R.id.btn_equal) {
+
+            buttonOpenSecondAc.setAlpha(1);
             y = Integer.parseInt(textView.getText().toString());
             int result  = 0;
             switch (operation){
@@ -148,6 +184,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             textView.setText(String.valueOf(result));
+
+            /*Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+            intent.putExtra("calc_result", result);
+            startActivity(intent);*/
+
         }
 
         isOperationClick = true;

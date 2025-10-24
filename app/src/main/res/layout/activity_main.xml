@@ -7,28 +7,41 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@color/black">
+
+    <com.google.android.material.button.MaterialButton
+        android:alpha="0"
+        android:id="@+id/btn_open_sec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="82dp"
+        />
+
     <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/container"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
 
 
         <HorizontalScrollView
-            android:scrollbars="none"
-
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginHorizontal="32dp"
             android:clipToPadding="false"
-            >
+            android:scrollbars="none">
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
-                android:layout_gravity="end"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:maxLines="1"
                 android:text="0"
                 android:textColor="@color/white"
